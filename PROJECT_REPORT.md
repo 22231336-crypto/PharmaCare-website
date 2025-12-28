@@ -13,7 +13,7 @@
 - Ahmad Seif Deen
 - Rayan Zaarour
 
-**GitHub Repository:** https://github.com/yourusername/pharmacy-store  
+**GitHub Repository:** https://github.com/22231336-crypto/pharmacy-store  
 **Live Demo:** [To be added after deployment]
 
 ---
@@ -507,7 +507,7 @@ The project is ready for deployment to GitHub Pages, Vercel, or Netlify, and pro
 
 ---
 
-**Project Repository:** https://github.com/yourusername/pharmacy-store  
+**Project Repository:** https://github.com/22231336-crypto/pharmacy-store  
 **Submission Date:** [Add date]  
 **Course:** CSCI426 - Advanced Web Programming  
 **Institution:** Department of Computer Science and Information Technology

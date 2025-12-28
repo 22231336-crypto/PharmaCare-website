@@ -46,7 +46,7 @@ PharmaCare is a modern, responsive online pharmacy platform built with React.js.
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/pharmacy-store.git
+   git clone https://github.com/22231336-crypto/pharmacy-store.git
    cd pharmacy-store
    ```
 
@@ -203,7 +203,7 @@ This project is created for educational purposes as part of CSCI426 course requi
 
 For questions or support, please contact:
 - Email: info@pharmacare.com
-- GitHub: [Your GitHub Profile](https://github.com/yourusername)
+- GitHub: [22231336-crypto](https://github.com/22231336-crypto)
 
 ---
 
