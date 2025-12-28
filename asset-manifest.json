@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/PharmaCare-website/static/css/main.5973916f.css",
+    "main.js": "/PharmaCare-website/static/js/main.3826019a.js",
+    "static/js/453.785ded79.chunk.js": "/PharmaCare-website/static/js/453.785ded79.chunk.js",
+    "index.html": "/PharmaCare-website/index.html",
+    "main.5973916f.css.map": "/PharmaCare-website/static/css/main.5973916f.css.map",
+    "main.3826019a.js.map": "/PharmaCare-website/static/js/main.3826019a.js.map",
+    "453.785ded79.chunk.js.map": "/PharmaCare-website/static/js/453.785ded79.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5973916f.css",
+    "static/js/main.3826019a.js"
+  ]
+}
