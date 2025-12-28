@@ -185,8 +185,8 @@ The following features will be implemented in Phase 2:
 
 ## 👥 Team Members
 
-- **Student Name 1** - Student ID
-- **Student Name 2** - Student ID (if working in a group)
+- **Ahmad Seif Deen**
+- **Rayan Zaarour**
 
 ## 📄 License
 

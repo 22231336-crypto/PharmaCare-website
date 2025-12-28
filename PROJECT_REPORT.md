@@ -10,8 +10,8 @@
 **Phase:** 1 (Frontend Development)  
 **Date:** December 2025  
 **Team Members:**
-- Student Name 1 - Student ID 1
-- Student Name 2 - Student ID 2 (if applicable)
+- Ahmad Seif Deen
+- Rayan Zaarour
 
 **GitHub Repository:** https://github.com/yourusername/pharmacy-store  
 **Live Demo:** [To be added after deployment]
