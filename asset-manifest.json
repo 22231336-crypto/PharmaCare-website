@@ -1,15 +1,33 @@
 {
   "files": {
-    "main.css": "/PharmaCare-website/static/css/main.5973916f.css",
-    "main.js": "/PharmaCare-website/static/js/main.3826019a.js",
+    "main.css": "/PharmaCare-website/static/css/main.bca796d0.css",
+    "main.js": "/PharmaCare-website/static/js/main.7ca64587.js",
     "static/js/453.785ded79.chunk.js": "/PharmaCare-website/static/js/453.785ded79.chunk.js",
+    "static/media/skin care.png": "/PharmaCare-website/static/media/skin care.3369f7da589deadfb50c.png",
+    "static/media/daily medicines.png": "/PharmaCare-website/static/media/daily medicines.62e9deff169a4c17ecdd.png",
+    "static/media/now.png": "/PharmaCare-website/static/media/now.1f0e58b369998836d57f.png",
+    "static/media/paracetamol.jpg": "/PharmaCare-website/static/media/paracetamol.30e591d7bc1959a42e3e.jpg",
+    "static/media/vitamin c mask.webp": "/PharmaCare-website/static/media/vitamin c mask.0c9acb5dcea38f18bcec.webp",
+    "static/media/img2.webp": "/PharmaCare-website/static/media/img2.0e9f8c3d9a625124bdc2.webp",
+    "static/media/img1.webp": "/PharmaCare-website/static/media/img1.4e3b34e940a3bf543afb.webp",
+    "static/media/dental care kit.jpg": "/PharmaCare-website/static/media/dental care kit.4100000edf7d67598d44.jpg",
+    "static/media/sunscreen spf.webp": "/PharmaCare-website/static/media/sunscreen spf.f179a754c56cebe0a5fa.webp",
+    "static/media/vitamin d2 iu.jpg": "/PharmaCare-website/static/media/vitamin d2 iu.1b32c92fe09b623649d3.jpg",
+    "static/media/hair care shampoo.jpg": "/PharmaCare-website/static/media/hair care shampoo.434ce99887810587e44f.jpg",
+    "static/media/vitamin b complex.avif": "/PharmaCare-website/static/media/vitamin b complex.79d7fa3dd948bdbb2636.avif",
+    "static/media/anti-aging serum.webp": "/PharmaCare-website/static/media/anti-aging serum.cdb59a00709fa522b025.webp",
+    "static/media/amoxicillin.jpeg": "/PharmaCare-website/static/media/amoxicillin.8c419698d2916a1104a3.jpeg",
+    "static/media/multi-vitamin.webp": "/PharmaCare-website/static/media/multi-vitamin.0fb64836ddddc011e7a6.webp",
+    "static/media/aspirin.avif": "/PharmaCare-website/static/media/aspirin.c8223ea925775381bd37.avif",
+    "static/media/BODY LOTION.webp": "/PharmaCare-website/static/media/BODY LOTION.5ebc9e6744d1486bfc60.webp",
+    "static/media/moisturizing cream.webp": "/PharmaCare-website/static/media/moisturizing cream.6c26aa0bfd9a90e1c49b.webp",
     "index.html": "/PharmaCare-website/index.html",
-    "main.5973916f.css.map": "/PharmaCare-website/static/css/main.5973916f.css.map",
-    "main.3826019a.js.map": "/PharmaCare-website/static/js/main.3826019a.js.map",
+    "main.bca796d0.css.map": "/PharmaCare-website/static/css/main.bca796d0.css.map",
+    "main.7ca64587.js.map": "/PharmaCare-website/static/js/main.7ca64587.js.map",
     "453.785ded79.chunk.js.map": "/PharmaCare-website/static/js/453.785ded79.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5973916f.css",
-    "static/js/main.3826019a.js"
+    "static/css/main.bca796d0.css",
+    "static/js/main.7ca64587.js"
   ]
 }
