@@ -10,3 +10,102 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Simple dark-mode support */
+:root.dark {
+  color-scheme: dark;
+}
+
+body.dark {
+  background-color: #0b1220;
+  color: #e6f2f1;
+}
+
+/* Make entire site (Home) dark when `.dark` added to root */
+.dark body {
+  background-color: #071022;
+  color: #e6eef0;
+}
+
+.dark .min-h-screen {
+  background-color: transparent;
+}
+
+/* General utility overrides for common Tailwind classes used on Home */
+.dark .bg-white {
+  background-color: #0b1220 !important;
+  color: #e6eef0 !important;
+}
+
+.dark .bg-gray-50 {
+  background-color: #071423 !important;
+}
+
+.dark .bg-white\/90 {
+  background-color: rgba(11, 18, 32, 0.9) !important;
+}
+
+.dark .text-gray-600 {
+  color: #9fb4b7 !important;
+}
+
+.dark .text-gray-800 {
+  color: #dbeef0 !important;
+}
+
+.dark .border-gray-100 {
+  border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Dark gradients for hero and category cards */
+.dark .bg-gradient-to-r.from-cyan-500.to-teal-500,
+.dark .bg-gradient-to-br.from-cyan-500.to-teal-500 {
+  background: linear-gradient(90deg, #044e3f 0%, #06343a 100%) !important;
+}
+
+.dark .bg-gradient-to-br.from-pink-50.to-pink-100,
+.dark .bg-gradient-to-br.from-cyan-50.to-teal-50,
+.dark .bg-gradient-to-br.from-yellow-50.to-yellow-100 {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01)) !important;
+}
+
+/* Ensure images remain visible */
+.dark img {
+  filter: brightness(0.95) contrast(1.05);
+}
+
+/* Dark-mode styles for product cards */
+.dark .product-card {
+  background-color: #0f1724 !important;
+  border-color: #1f2937 !important;
+  color: #e6eef0 !important;
+}
+
+.dark .product-card h3 {
+  color: #e6f2f1 !important;
+}
+
+.dark .product-card p {
+  color: #cbd5dc !important;
+}
+
+.dark .product-card .text-primary {
+  color: #60f2d8 !important;
+}
+
+.dark .product-card .bg-green-100 {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+.dark .product-card button.bg-primary {
+  background-color: #06b6d4 !important;
+  color: #022;
+}
+
+.dark .product-card .h-48 {
+  background-color: #071123;
+}
+
+.dark img {
+  filter: brightness(0.95) contrast(1.02);
+}

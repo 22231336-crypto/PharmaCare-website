@@ -1,18 +1,122 @@
-import React, { useState } from 'react';
-import { products as allProducts } from '../data/products';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { productsAPI } from '../services/api';
+import Reviews from '../components/Reviews';
+import ProductCard from '../components/ProductCard';
 
 function Products({ onAddToCart }) {
+  const [searchParams] = useSearchParams();
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
+  const [tempMin, setTempMin] = useState('');
+  const [tempMax, setTempMax] = useState('');
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
+  const [sortMethod, setSortMethod] = useState('');
+  const [offerFilter, setOfferFilter] = useState('');
+  const [showOnlyOffer, setShowOnlyOffer] = useState(false);
+
+  useEffect(() => {
+    fetchProducts();
+    // Get category/offer from URL if exists
+    const categoryFromUrl = searchParams.get('category');
+    if (categoryFromUrl) {
+      setSelectedCategory(categoryFromUrl);
+    }
+    const offerFromUrl = searchParams.get('offer');
+    if (offerFromUrl) {
+      setOfferFilter(offerFromUrl);
+      // when clicking an offer from Home, show only offer products by default
+      setShowOnlyOffer(true);
+      // If category wasn't passed, map offer key to category
+      if (!categoryFromUrl) {
+        if (offerFromUrl === 'skincare') setSelectedCategory('Cosmetics');
+        if (offerFromUrl === 'vitamins') setSelectedCategory('Vitamins');
+        if (offerFromUrl === 'daily') setSelectedCategory('Medicines');
+      }
+    }
+  }, [searchParams]);
+
+  const fetchProducts = async () => {
+    try {
+      setLoading(true);
+      const data = await productsAPI.getAll();
+      // Mark products that belong to offers based on offer mapping/keywords
+      const offerMap = { skincare: 'Cosmetics', vitamins: 'Vitamins', daily: 'Medicines' };
+      const normalizedOffer = (offerFilter || '').toLowerCase();
+
+      const enhanced = Array.isArray(data) ? data.map(p => {
+        const name = String(p.name || '').toLowerCase();
+        const desc = String(p.description || '').toLowerCase();
+        const category = String(p.category || '').toLowerCase();
+        let isOffer = false;
+
+        if (normalizedOffer) {
+          const mapped = (offerMap[normalizedOffer] || '').toLowerCase();
+          isOffer = category === mapped || name.includes(normalizedOffer) || desc.includes(normalizedOffer);
+        } else {
+          // general detection: match any known offer category or keyword
+          isOffer = Object.keys(offerMap).some(k => {
+            const mapped = (offerMap[k] || '').toLowerCase();
+            return category === mapped || name.includes(k) || desc.includes(k);
+          });
+        }
+
+        return { ...p, isOffer };
+      }) : [];
+
+      setProducts(enhanced);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      // Only show alert if we haven't already shown one
+      if (!window.productsErrorShown) {
+        window.productsErrorShown = true;
+        alert('Failed to load products. Please make sure the backend server is running.');
+        // Reset the flag after 2 seconds to allow future alerts if needed
+        setTimeout(() => { window.productsErrorShown = false; }, 2000);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const categories = ['All', 'Medicines', 'Cosmetics', 'Vitamins', 'Personal Care'];
 
-  const filteredProducts = allProducts.filter(product => {
-    const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
-    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         product.description.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+  // Apply category + search + price range filters, then sort client-side
+  const filteredProducts = products
+    .filter(product => {
+      const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
+      const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           product.description.toLowerCase().includes(searchTerm.toLowerCase());
+
+      let matchesMin = true;
+      let matchesMax = true;
+      const price = Number(product.price || 0);
+      if (minPrice !== '') {
+        const m = Number(minPrice);
+        if (!Number.isNaN(m)) matchesMin = price >= m;
+      }
+      if (maxPrice !== '') {
+        const M = Number(maxPrice);
+        if (!Number.isNaN(M)) matchesMax = price <= M;
+      }
+
+      // respect the 'Show only offers' toggle — product.isOffer computed earlier
+      if (showOnlyOffer) {
+        return matchesCategory && matchesSearch && matchesMin && matchesMax && product.isOffer;
+      }
+
+      return matchesCategory && matchesSearch && matchesMin && matchesMax;
+    })
+    .sort((a, b) => {
+      if (sortMethod === 'price_asc') return Number(a.price) - Number(b.price);
+      if (sortMethod === 'price_desc') return Number(b.price) - Number(a.price);
+      if (sortMethod === 'name_asc') return a.name.localeCompare(b.name);
+      if (sortMethod === 'name_desc') return b.name.localeCompare(a.name);
+      return 0;
+    });
 
   return (
     <div className="min-h-screen">
@@ -23,6 +127,8 @@ function Products({ onAddToCart }) {
           <p className="text-xl">Browse our wide selection of healthcare products</p>
         </div>
       </div>
+
+      {/* Best Sellers removed */}
 
       <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         {/* Search and Filter */}
@@ -36,6 +142,28 @@ function Products({ onAddToCart }) {
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
             />
+          </div>
+
+          {/* Price range + Sort controls */}
+          <div className="mb-6 flex flex-wrap gap-4 items-center">
+            <div className="flex items-center gap-2">
+              <input type="number" placeholder="Min" value={tempMin} onChange={e => setTempMin(e.target.value)} className="w-24 px-2 py-1 border rounded" />
+              <span className="text-gray-500">-</span>
+              <input type="number" placeholder="Max" value={tempMax} onChange={e => setTempMax(e.target.value)} className="w-24 px-2 py-1 border rounded" />
+              <button
+                onClick={() => { setMinPrice(tempMin); setMaxPrice(tempMax); }}
+                className="ml-2 px-3 py-1 bg-primary text-white rounded">
+                Apply
+              </button>
+            </div>
+
+            <select value={sortMethod} onChange={e => setSortMethod(e.target.value)} className="px-3 py-1 border rounded">
+              <option value="">Sort</option>
+              <option value="price_asc">Price: Low → High</option>
+              <option value="price_desc">Price: High → Low</option>
+              <option value="name_asc">Name: A → Z</option>
+              <option value="name_desc">Name: Z → A</option>
+            </select>
           </div>
 
           {/* Category Filters */}
@@ -56,41 +184,24 @@ function Products({ onAddToCart }) {
           </div>
         </div>
 
+        {/* Loading State */}
+        {loading && (
+          <div className="text-center py-12">
+            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+            <p className="mt-4 text-gray-600">Loading products...</p>
+          </div>
+        )}
+
         {/* Products Grid */}
+        {!loading && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {filteredProducts.map(product => (
-            <div
-              key={product.id}
-              className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-xl transition transform hover:-translate-y-1"
-            >
-              <div className="bg-gradient-to-br from-primary to-secondary h-48 flex items-center justify-center text-6xl">
-                {product.image}
-              </div>
-              <div className="p-4">
-                <span className="text-xs font-semibold text-primary bg-green-100 px-2 py-1 rounded">
-                  {product.category}
-                </span>
-                <h3 className="text-lg font-bold mt-2 mb-1">{product.name}</h3>
-                <p className="text-gray-600 text-sm mb-3">{product.description}</p>
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-primary">${product.price}</span>
-                  {product.inStock ? (
-                    <button
-                      onClick={() => onAddToCart(product)}
-                      className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition"
-                    >
-                      Add to Cart
-                    </button>
-                  ) : (
-                    <span className="text-red-500 font-semibold">Out of Stock</span>
-                  )}
-                </div>
-              </div>
-            </div>
+            <ProductCard key={product.id} product={product} onAddToCart={onAddToCart} />
           ))}
         </div>
+        )}
 
-        {filteredProducts.length === 0 && (
+        {!loading && filteredProducts.length === 0 && (
           <div className="text-center py-16">
             <p className="text-gray-500 text-xl">No products found matching your criteria.</p>
           </div>

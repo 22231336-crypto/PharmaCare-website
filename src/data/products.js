@@ -1,4 +1,21 @@
 // Sample product data
+import paracetamol from '../assets/paracetamol.jpg';
+import ibuprofen from '../assets/ibuprofen.jpg';
+import aspirin from '../assets/aspirin.avif';
+import amoxicillin from '../assets/amoxicillin.jpeg';
+import moisturizing from '../assets/moisturizing cream.webp';
+import antiAging from '../assets/anti-aging serum.webp';
+import sunscreen from '../assets/sunscreen spf.webp';
+import vitaminCMask from '../assets/vitamin c mask.webp';
+import vitaminD3 from '../assets/vitamin d2 iu.jpg';
+import multivitamin from '../assets/multi-vitamin.webp';
+import omega3 from '../assets/omega 3.jpg';
+import vitaminB from '../assets/vitamin b complex.avif';
+import handSoap from '../assets/antibacterial hand soap.jpg';
+import dentalKit from '../assets/dental care kit.jpg';
+import bodyLotion from '../assets/BODY LOTION.webp';
+import shampoo from '../assets/hair care shampoo.jpg';
+
 export const products = [
   // Medicines
   {
@@ -7,8 +24,10 @@ export const products = [
     category: 'Medicines',
     price: 5.99,
     description: 'Pain relief and fever reducer',
-    image: '💊',
+    image: paracetamol,
     inStock: true,
+    sales: 120,
+    rating: 4.4,
   },
   {
     id: 2,
@@ -16,8 +35,10 @@ export const products = [
     category: 'Medicines',
     price: 7.99,
     description: 'Anti-inflammatory medication',
-    image: '💊',
+    image: ibuprofen,
     inStock: true,
+    sales: 95,
+    rating: 4.3,
   },
   {
     id: 3,
@@ -25,8 +46,10 @@ export const products = [
     category: 'Medicines',
     price: 4.99,
     description: 'Blood thinner and pain relief',
-    image: '💊',
+    image: aspirin,
     inStock: true,
+    sales: 180,
+    rating: 4.6,
   },
   {
     id: 4,
@@ -34,8 +57,10 @@ export const products = [
     category: 'Medicines',
     price: 12.99,
     description: 'Antibiotic for bacterial infections',
-    image: '💊',
+    image: amoxicillin,
     inStock: false,
+    sales: 40,
+    rating: 4.2,
   },
 
   // Cosmetics
@@ -45,8 +70,10 @@ export const products = [
     category: 'Cosmetics',
     price: 24.99,
     description: 'Hydrating cream for all skin types',
-    image: '💄',
+    image: moisturizing,
     inStock: true,
+    sales: 85,
+    rating: 4.5,
   },
   {
     id: 6,
@@ -54,8 +81,10 @@ export const products = [
     category: 'Cosmetics',
     price: 35.99,
     description: 'Reduces wrinkles and fine lines',
-    image: '💄',
+    image: antiAging,
     inStock: true,
+    sales: 60,
+    rating: 4.4,
   },
   {
     id: 7,
@@ -63,8 +92,10 @@ export const products = [
     category: 'Cosmetics',
     price: 18.99,
     description: 'Broad spectrum sun protection',
-    image: '💄',
+    image: sunscreen,
     inStock: true,
+    sales: 140,
+    rating: 4.6,
   },
   {
     id: 8,
@@ -72,8 +103,10 @@ export const products = [
     category: 'Cosmetics',
     price: 15.99,
     description: 'Brightening and rejuvenating mask',
-    image: '💄',
+    image: vitaminCMask,
     inStock: true,
+    sales: 70,
+    rating: 4.3,
   },
 
   // Vitamins
@@ -83,8 +116,10 @@ export const products = [
     category: 'Vitamins',
     price: 14.99,
     description: 'Supports bone and immune health',
-    image: '🧪',
+    image: vitaminD3,
     inStock: true,
+    sales: 150,
+    rating: 4.5,
   },
   {
     id: 10,
@@ -92,8 +127,10 @@ export const products = [
     category: 'Vitamins',
     price: 22.99,
     description: 'Complete daily vitamin supplement',
-    image: '🧪',
+    image: multivitamin,
     inStock: true,
+    sales: 340,
+    rating: 4.8,
   },
   {
     id: 11,
@@ -101,8 +138,10 @@ export const products = [
     category: 'Vitamins',
     price: 19.99,
     description: 'Heart and brain health support',
-    image: '🧪',
+    image: omega3,
     inStock: true,
+    sales: 290,
+    rating: 4.7,
   },
   {
     id: 12,
@@ -110,8 +149,10 @@ export const products = [
     category: 'Vitamins',
     price: 16.99,
     description: 'Energy and metabolism support',
-    image: '🧪',
+    image: vitaminB,
     inStock: true,
+    sales: 300,
+    rating: 4.6,
   },
 
   // Personal Care
@@ -121,8 +162,10 @@ export const products = [
     category: 'Personal Care',
     price: 6.99,
     description: 'Kills 99.9% of germs',
-    image: '🧴',
+    image: handSoap,
     inStock: true,
+    sales: 210,
+    rating: 4.5,
   },
   {
     id: 14,
@@ -130,8 +173,10 @@ export const products = [
     category: 'Personal Care',
     price: 12.99,
     description: 'Complete oral hygiene set',
-    image: '🧴',
+    image: dentalKit,
     inStock: true,
+    sales: 75,
+    rating: 4.2,
   },
   {
     id: 15,
@@ -139,8 +184,10 @@ export const products = [
     category: 'Personal Care',
     price: 11.99,
     description: 'Nourishing body moisturizer',
-    image: '🧴',
+    image: bodyLotion,
     inStock: true,
+    sales: 130,
+    rating: 4.4,
   },
   {
     id: 16,
@@ -148,7 +195,9 @@ export const products = [
     category: 'Personal Care',
     price: 9.99,
     description: 'Strengthening and volumizing',
-    image: '🧴',
+    image: shampoo,
     inStock: true,
+    sales: 110,
+    rating: 4.3,
   },
 ];

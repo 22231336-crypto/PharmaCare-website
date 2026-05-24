@@ -26,17 +26,24 @@ function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-xl font-bold mb-4">Contact Us</h3>
+            <h3 className="text-xl font-bold mb-4">Contact & Hours</h3>
             <ul className="space-y-2 text-gray-400">
-              <li>📧 info@pharmacare.com</li>
-              <li>📱 +961 123 456 789</li>
-              <li>📍 Beirut, Lebanon</li>
+              <li><strong>Working Hours</strong></li>
+              <li>Mon - Sat: 8:00 AM - 3:00 AM</li>
+              <li>Sun: 10:00 AM - 3:00 AM</li>
+              <li className="mt-2"><strong>Address</strong></li>
+              <li>Lebanon, Bekaa, Saadnayel</li>
+              <li className="mt-2"><strong>Phone</strong></li>
+              <li>03655808</li>
+              <li>03019145</li>
+              <li className="mt-2"><strong>Email</strong></li>
+              <li>Choubassipharm@gmail.com</li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
-          <p>&copy; 2025 PharmaCare. All rights reserved.</p>
+          <p>&copy; 2026 PharmaCare. All rights reserved.</p>
         </div>
       </div>
     </footer>

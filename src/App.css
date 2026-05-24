@@ -32,7 +32,59 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* Offers strip scrolling */
+.offers-strip {
+  width: 100%;
+  background: linear-gradient(90deg, #10b981 0%, #06b6d4 100%);
+  /* green -> teal */
+  padding: 6px 0;
+}
+
+.offers-track {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  will-change: transform;
+  animation: scroll-left 14s linear infinite;
+}
+
+.offers-track.paused {
+  animation-play-state: paused;
+}
+
+.offer-item {
+  min-width: 320px;
+  max-width: 420px;
+  white-space: nowrap;
+  color: white;
+  /* text color on colored strip */
+}
+
+.offer-item img {
+  background: white;
+  /* ensure image contrast */
+  padding: 2px;
+  border-radius: 6px;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .offers-track {
+    animation: none;
   }
 }

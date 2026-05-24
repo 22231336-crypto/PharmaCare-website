@@ -1,0 +1,1 @@
+OCR worker does not expose load(); OCR will use recognize() directly when available

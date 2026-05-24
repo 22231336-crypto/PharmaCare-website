@@ -1,0 +1,25 @@
+Twilio not configured (TWILIO_ACCOUNT_SID/TWILIO_AUTH_TOKEN missing)
+🚀 Server running on http://localhost:5000
+✅ Connected to MySQL database
+TESSERACT: {
+  status: 'loading tesseract core',
+  progress: 0,
+  userJobId: 'Job-0-8fe8e'
+}
+TESSERACT: {
+  status: 'loaded tesseract core',
+  progress: 1,
+  userJobId: 'Job-0-8fe8e'
+}
+TESSERACT: {
+  workerId: 'Worker-0-d62f9',
+  status: 'initializing tesseract',
+  progress: 0,
+  userJobId: 'Job-0-8fe8e'
+}
+TESSERACT: {
+  workerId: 'Worker-0-d62f9',
+  status: 'initialized tesseract',
+  progress: 1,
+  userJobId: 'Job-0-8fe8e'
+}

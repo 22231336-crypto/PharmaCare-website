@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { contactAPI } from '../services/api';
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -8,6 +9,8 @@ function Contact() {
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     setFormData({
@@ -16,15 +19,26 @@ function Contact() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // In Phase 2, this will send data to backend
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: '', email: '', phone: '', message: '' });
-    }, 3000);
+    setLoading(true);
+    setError('');
+
+    try {
+      const response = await contactAPI.submit(formData);
+      if (response.message) {
+        setSubmitted(true);
+        setTimeout(() => {
+          setSubmitted(false);
+          setFormData({ name: '', email: '', phone: '', message: '' });
+        }, 3000);
+      }
+    } catch (err) {
+      console.error('Error submitting form:', err);
+      setError('Failed to send message. Please make sure the backend server is running.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -45,6 +59,11 @@ function Contact() {
             {submitted && (
               <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
                 Thank you! Your message has been sent successfully.
+              </div>
+            )}
+            {error && (
+              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                {error}
               </div>
             )}
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -97,8 +116,10 @@ function Contact() {
               </div>
               <button
                 type="submit"
-                className="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-secondary transition"
+                disabled={loading}
+                className="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-secondary transition disabled:bg-gray-400 disabled:cursor-not-allowed"
               >
+                {loading ? 'Sending...' : 'Send Message'}
                 Send Message
               </button>
             </form>
@@ -117,8 +138,7 @@ function Contact() {
                 </div>
                 <div>
                   <h3 className="font-bold text-lg mb-1">Email</h3>
-                  <p className="text-gray-600">info@pharmacare.com</p>
-                  <p className="text-gray-600">support@pharmacare.com</p>
+                  <p className="text-gray-600"><a href="mailto:Choubassipharm@gmail.com" className="hover:underline">Choubassipharm@gmail.com</a></p>
                 </div>
               </div>
 
@@ -130,8 +150,8 @@ function Contact() {
                 </div>
                 <div>
                   <h3 className="font-bold text-lg mb-1">Phone</h3>
-                  <p className="text-gray-600">+961 1 234 567</p>
-                  <p className="text-gray-600">+961 70 123 456</p>
+                  <p className="text-gray-600"><a href="tel:03655808" className="hover:underline">03655808</a></p>
+                  <p className="text-gray-600"><a href="tel:03019145" className="hover:underline">03019145</a></p>
                 </div>
               </div>
 
@@ -143,8 +163,7 @@ function Contact() {
                 </div>
                 <div>
                   <h3 className="font-bold text-lg mb-1">Address</h3>
-                  <p className="text-gray-600">123 Medical Street</p>
-                  <p className="text-gray-600">Beirut, Lebanon</p>
+                  <p className="text-gray-600">Lebanon, Bekaa, Saadnayel</p>
                 </div>
               </div>
 
@@ -156,16 +175,25 @@ function Contact() {
                 </div>
                 <div>
                   <h3 className="font-bold text-lg mb-1">Working Hours</h3>
-                  <p className="text-gray-600">Monday - Friday: 9:00 AM - 8:00 PM</p>
-                  <p className="text-gray-600">Saturday: 10:00 AM - 6:00 PM</p>
-                  <p className="text-gray-600">Sunday: Closed</p>
+                  <p className="text-gray-600">Monday - Saturday: 8:00 AM - 3:00 AM</p>
+                  <p className="text-gray-600">Sunday: 10:00 AM - 3:00 AM</p>
                 </div>
               </div>
             </div>
 
-            {/* Map Placeholder */}
-            <div className="mt-8 bg-gray-200 rounded-lg h-64 flex items-center justify-center">
-              <p className="text-gray-500">Map Location (To be integrated in Phase 2)</p>
+            {/* Map Location */}
+            <div className="mt-8 rounded-lg overflow-hidden shadow-lg">
+              <iframe
+                title="PharmaCare Location"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3312.4623894287624!2d35.503047!3d33.888629!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151f17215880a78f%3A0x729182bae99836b4!2sBeirut%2C%20Lebanon!5e0!3m2!1sen!2s!4v1234567890123"
+                width="100%"
+                height="300"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="w-full"
+              ></iframe>
             </div>
           </div>
         </div>
